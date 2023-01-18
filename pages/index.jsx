@@ -8,7 +8,7 @@ const DEFAULT_STATUS = 'Note: Conversations are saved to your browser\'s local s
 
 export default function Home() {
   const { user, error, isLoading } = useUser();
-  const [ title, setTitle ] = useState('Welcome!');
+  const [ title, setTitle ] = useState('Welcome, have a chat with OpenAI.');
   const [ subTitle, setSubTitle ] = useState('Login to use OpenAI.');
   const [ headingProps, setHeadingProps ] = useState({ subTitle });
   const [ conversation, setConversation ] = useState([]);
@@ -48,7 +48,7 @@ export default function Home() {
   useEffect(() => {
     if (!user) return;
 
-    setTitle(`Hi ${user.name}!`);
+    setTitle(`Hi ${user.name}.`);
     setSubTitle('Click to logout.');
 
     setHeadingProps({

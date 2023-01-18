@@ -6,6 +6,7 @@
   font-size: 1rem;
   padding: .75rem 2rem;
   color: var(--text-muted);
+  transition: border-color .3s ease-in-out;
 
   &:focus {
     border-color: var(--secondary);
