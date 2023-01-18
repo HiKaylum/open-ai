@@ -104,7 +104,7 @@ export default function Home() {
         ) }
       </div>
       <form onSubmit={handleForm}>
-        <Input id="prompt" type="text" placeholder="Enter a prompt" disabled={!user || isFetching} autoComplete="off" />
+        <Input id="prompt" type="text" placeholder="Say that this is a test" minlength="15" disabled={!user || isFetching} autoComplete="off" required />
       </form>
       <ConvoBox conversation={conversation} />
     </section>
