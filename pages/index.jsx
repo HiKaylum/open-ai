@@ -5,6 +5,15 @@ import { Button, Heading, Input, ConvoBox } from '@/components';
 import styles from '@/styles/Home.module.scss';
 
 const DEFAULT_STATUS = 'Note: Conversations are saved to your browser\'s local storage, they are not saved to a database. (Press Delete to clear)';
+const SUGGESTED_PROMPTS = [
+  'Say that this is a test',
+  'Tell me a story about a frog',
+  'Tell me how a microwaves works',
+  'What is 1+1',
+  'Translate "Hello into french"',
+  'Tell me about yourself',
+  'What is JavaScript',
+];
 
 export default function Home() {
   const { user, error, isLoading } = useUser();
@@ -15,6 +24,7 @@ export default function Home() {
   const [ response, setResponse ] = useState();
   const [ isFetching, setIsFetching ] = useState(false);
   const [ status, setStatus ] = useState(DEFAULT_STATUS);
+  const [ placeholder, setPlaceholder ] = useState(SUGGESTED_PROMPTS[Math.floor(Math.random() * SUGGESTED_PROMPTS.length)]);
 
   useEffect(() => {
     if(!user) return;
@@ -124,7 +134,7 @@ export default function Home() {
         ) }
       </div>
       <form onSubmit={handleForm}>
-        <Input id="prompt" type="text" placeholder="Say that this is a test" minLength="4" disabled={!user || isFetching} autoComplete="off" required />
+        <Input id="prompt" type="text" placeholder={placeholder} minLength="4" disabled={!user || isFetching} autoComplete="off" required />
         {
           user && (
             <abbr>{ status }</abbr>
