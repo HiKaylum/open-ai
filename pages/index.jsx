@@ -4,6 +4,8 @@ import { Button, Heading, Input, ConvoBox } from '@/components';
 
 import styles from '@/styles/Home.module.scss';
 
+const DEFAULT_STATUS = 'Note: Conversations are saved to your browser\'s local storage, they are not saved to a database. (Press Delete to clear)';
+
 export default function Home() {
   const { user, error, isLoading } = useUser();
   const [ title, setTitle ] = useState('Welcome!');
@@ -12,6 +14,7 @@ export default function Home() {
   const [ conversation, setConversation ] = useState([]);
   const [ response, setResponse ] = useState();
   const [ isFetching, setIsFetching ] = useState(false);
+  const [ status, setStatus ] = useState(DEFAULT_STATUS);
 
   useEffect(() => {
     if(!user) return;
@@ -23,6 +26,21 @@ export default function Home() {
     } else {
       setConversation(JSON.parse(storedConversation));
     }
+
+    const deletLocal = (evt) => {
+      const key = evt.key;
+
+      if (key === 'Delete') {
+        setConversation([]);
+        localStorage.setItem(user.sub, JSON.stringify([]));
+      }
+    };
+
+    document.addEventListener('keyup', deletLocal);
+
+    return () => {
+      document.removeEventListener('keyup', deletLocal);
+    }
     
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
@@ -30,7 +48,7 @@ export default function Home() {
   useEffect(() => {
     if (!user) return;
 
-    setTitle(user.name);
+    setTitle(`Hi ${user.name}!`);
     setSubTitle('Click to logout.');
 
     setHeadingProps({
@@ -78,6 +96,7 @@ export default function Home() {
     ]);
 
     setIsFetching(true);
+    setStatus('OpenAI is thinking...');
     const res = await fetch('api/openai', {
       method: 'POST',
       headers: {
@@ -89,6 +108,7 @@ export default function Home() {
     const data = await res.json();
     setResponse(data);
     setIsFetching(false);
+    setStatus(DEFAULT_STATUS);
   }
 
 
@@ -104,7 +124,12 @@ export default function Home() {
         ) }
       </div>
       <form onSubmit={handleForm}>
-        <Input id="prompt" type="text" placeholder="Say that this is a test" minlength="15" disabled={!user || isFetching} autoComplete="off" required />
+        <Input id="prompt" type="text" placeholder="Say that this is a test" minLength="4" disabled={!user || isFetching} autoComplete="off" required />
+        {
+          user && (
+            <abbr>{ status }</abbr>
+          )
+        }
       </form>
       <ConvoBox conversation={conversation} />
     </section>
