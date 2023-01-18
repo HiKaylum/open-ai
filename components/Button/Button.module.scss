@@ -1,0 +1,22 @@
+.button {
+  display: inline-block;
+  color: var(--text-primary);
+  padding: .5rem 2rem;
+  background-color: var(--primary);
+  border-radius: .25rem;
+  transition: background-color .3s ease-in-out;
+  align-self: center;
+
+  &.secondary {
+    background-color: var(--secondary);
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--primary-light);
+  }
+
+  &:link, &:active, &:visited, &:hover {
+    text-decoration: none;
+  }
+}

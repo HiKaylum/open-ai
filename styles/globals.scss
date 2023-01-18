@@ -1,0 +1,49 @@
+:root {
+  --primary: #e0648e;
+  --primary-light: #e98ead;
+  --secondary: #66e1b8;
+
+  --text-primary: #ffffff;
+  --text-muted: #acb4ba;
+
+  --black: #000000;
+  --black-muted: #1e1e1e;
+}
+
+
+*::-webkit-scrollbar {
+  width: 8px;
+  &-thumb {
+    background-color: var(--black-muted);
+    border-radius: 100rem;
+  }
+
+  &-track {
+    background-color: transparent;
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--black-muted) var(--black);
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+html,
+body {
+  max-width: 100vw;
+  background-color: var(--black);
+  color: var(--text-primary);
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

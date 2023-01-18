@@ -1,0 +1,15 @@
+.section {
+  width: 100%;
+  max-width: 1200px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 5rem;
+
+  .banner {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+  }
+}

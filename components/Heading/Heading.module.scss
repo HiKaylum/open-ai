@@ -1,0 +1,21 @@
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    color: var(--text-muted);
+  }
+
+  a {
+    color: var(--primary);
+
+    &:link, &:hover, &:active, &:visited {
+      text-decoration: none;
+    }
+  }
+}
